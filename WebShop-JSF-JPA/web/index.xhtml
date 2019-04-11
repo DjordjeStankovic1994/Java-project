@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:head>
+        <title>WebShop - Dobro došli</title>
+    </h:head>
+    <h:body>
+
+        <!--        <c:choose>
+                    <c:when test="#{loginMB.loggedIn}">-->
+        <h:form rendered="#{loginMB.loggedIn}">
+            <h:panelGrid id="userPanelId">
+                <p>Prijavljeni korisnik: #{loginMB.loggedInKorisnik.ime} #{loginMB.loggedInKorisnik.prezime} <h:commandLink value="Odjava" actionListener="#{loginMB.logout()}" /></p>
+                <hr />
+            </h:panelGrid>
+        </h:form>
+        <!--            </c:when>
+                    <c:otherwise>-->
+        <h:panelGrid rendered="#{not loginMB.loggedIn}">
+            <p>Za prijavu na Web Shop kliknite na <h:outputLink value="login.xhtml">prijava</h:outputLink></p>
+            <p>Vi ste nov korisnik? Registrujte se klikom na link <h:outputLink value="register.xhtml">registracija</h:outputLink></p>
+            <hr />
+        </h:panelGrid>
+        <!--            </c:otherwise>
+                </c:choose>-->
+        <h2>Dobro došli na Web Shop</h2>
+        <hr />
+        <h:form id="productForm">
+            <h:dataTable value = "#{products.products}" var = "pr">
+
+                <h:column>    				
+                    <f:facet name = "header">Naziv</f:facet>    				
+                        #{pr.naziv}
+                </h:column>
+
+                <h:column>
+                    <f:facet name = "header">Cena (din.)</f:facet>
+                        #{pr.cena}
+                </h:column>
+
+                <h:column>
+                    <f:facet name = "header"></f:facet>
+                    <h:commandButton value="Dodaj">
+                        <f:ajax execute="@form" render="korpaid" listener="#{korpa.addProduct(pr)}" />
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+            <br />
+            <h:outputText value="Količina: " />
+            <h:selectOneMenu value = "#{korpa.productNum}"> 
+                <f:selectItem itemValue = "1" itemLabel = "1" /> 
+                <f:selectItem itemValue = "2" itemLabel = "2" /> 
+                <f:selectItem itemValue = "3" itemLabel = "3" /> 
+                <f:selectItem itemValue = "4" itemLabel = "4" /> 
+                <f:selectItem itemValue = "5" itemLabel = "5" /> 
+            </h:selectOneMenu> 
+        </h:form>
+
+        <br />
+        <h3>Vaša korpa:</h3>
+        <hr />
+        <h:dataTable id="korpaid" value = "#{korpa.cartItems}" var = "ci">
+
+            <h:column>    				
+                <f:facet name = "header">Naziv</f:facet>    				
+                    #{ci.productName}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Cena (din.)</f:facet>
+                    #{ci.price}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Količina</f:facet>
+                    #{ci.productNum}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header"><b>Ukupna cena</b></f:facet>
+                <b>#{ci.totalPrice}</b>
+            </h:column>
+
+        </h:data+Table>
+
+        <hr />
+
+        <h:outputLink value="secured/purchase.xhtml">Potvrda kupovine</h:outputLink>
+
+
+    </h:body>
+
+
+
+</html>
+

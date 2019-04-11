@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Registracija</title>
+    </h:head>
+    <h:body>
+        <h2>Registracija novih korisnika</h2>
+        <hr />
+
+        <h:form>
+            <h:panelGrid id = "panel" columns = "3"
+                         cellpadding = "10" cellspacing = "1">
+                <h:outputLabel value = "Korisničko ime:" />
+                <h:inputText id="unfld" required="true" requiredMessage="Polje je obavezno" value="#{register.username}" />
+                <h:message for="unfld" />
+                <h:outputLabel value = "Lozinka:" />
+                <h:inputSecret id="passfld" required="true" requiredMessage="Polje je obavezno" value="#{register.password}" />
+                <h:message for="passfld" />
+                <h:outputLabel value = "Ime:" />
+                <h:inputText id="namfld" required="true" requiredMessage="Polje je obavezno" value="#{register.name}" />
+                <h:message for="namfld" />
+                <h:outputLabel value = "Prezime:" />
+                <h:inputText id="surfld" required="true" requiredMessage="Polje je obavezno" value="#{register.surname}" />
+                <h:message for="surfld" />
+                
+                <f:facet name = "footer">
+                    <h:panelGroup style = "display:block; text-align:left">
+                        <h:commandButton id = "submit" value = "Potvrda" action="#{register.register()}" />
+                    </h:panelGroup>
+                </f:facet>
+            </h:panelGrid>
+            <h3><h:outputLabel value="#{register.message}" /></h3>
+        </h:form>
+    </h:body>
+</html>
+
