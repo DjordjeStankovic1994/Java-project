@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+        <!--        <c:choose>
+                    <c:when test="#{loginMB.loggedIn}">   -->
+        <h:form rendered="#{loginMB.loggedIn}">
+            <h:panelGrid id="userPanelId">
+                <p>Prijavljeni korisnik: #{loginMB.loggedInKorisnik.ime} #{loginMB.loggedInKorisnik.prezime} <h:commandLink value="Odjava" actionListener="#{loginMB.logout()}" /></p>
+                <hr />
+            </h:panelGrid>
+        </h:form>
+        
+          <h:panelGrid rendered="#{not loginMB.loggedIn}">
+            <p>Za prijavu na Web Shop kliknite na <h:outputLink value="index.xhtml">prijava</h:outputLink></p>
+            <p>Vi ste nov korisnik? Registrujte se klikom na link <h:outputLink value="register.xhtml">registracija</h:outputLink></p>
+            <hr />
+          
+            <p>Za pregled proizvoda idite ovde <h:outputLink value="PrikaziProizvod.xhtml">Proizvodi</h:outputLink> </p>
+        </h:panelGrid>
+        <h2>Dobro dosli na Pocetnoj strani</h2>
+        <p>Dobro dosli kao admin</p>
+    </h:body>
+</html>
+
